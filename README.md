@@ -1,6 +1,9 @@
 # Книжный онлайн-магазин
 [Доска задач](https://trello.com/b/N4SVkmsi/online-book-store)  
 
+### Лабораторная работа №4
+[Отчет](https://docs.google.com/document/d/1XCsQlN3ctddITmQk-4DqYc0eJI72WeYPPpzDh3rKV5w/edit?usp=sharing)
+
 ### Лабораторная работа №3
 [Отчет](https://docs.google.com/document/d/1yqkAIHTJadKMPsDAT156mki4fX61RuriYXG0IMjlrF4/edit?usp=sharing)
 
