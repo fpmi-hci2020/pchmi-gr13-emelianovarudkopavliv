@@ -1,4 +1,8 @@
 language: python
+
+services:
+  - docker
+
 script:
   - python -m pytest -v
 
