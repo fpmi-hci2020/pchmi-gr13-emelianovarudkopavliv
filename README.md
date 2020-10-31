@@ -24,11 +24,15 @@ docker run -p 5000:5000 --rm -it cicd-buzz
 If you run this API locally, find it at http://localhost:5000/. Otherwise, it's at https://enigmatic-fjord-21043.herokuapp.com/. See wiki for the list of currently implemented requests.
 
 ## Contributing
-Olga Emelyanova - API
-Elizaveta Pavliv - mobile app
-Elizaveta Rudko - website
+Olga Emelyanova - API  
+Elizaveta Pavliv - mobile app  
+Elizaveta Rudko - website  
 
+## Links
 [Доска задач](https://trello.com/b/N4SVkmsi/online-book-store)  
+
+### Лабораторная работа №6
+[Отчет](https://docs.google.com/document/d/1SxKUJQ3qKWR2iIdwp54GnfThFLRbq41w9RUsQqbt9YE/edit?usp=sharing)
 
 ### Лабораторная работа №5
 [Отчет](https://docs.google.com/document/d/13xRC4Q1mV95B9rvDL7SD5nQtfdJC0OVN1I8Swgg0RR8/edit?usp=sharing)
