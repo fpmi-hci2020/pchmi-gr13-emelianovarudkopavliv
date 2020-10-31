@@ -7,4 +7,5 @@ script:
   - python -m pytest -v
 
 after_success:
-  - docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
+  — sh .travis/deploy_heroku.sh
+  — test “$TRAVIS_BRANCH” = “master” && sh .travis/deploy_heroku.sh
