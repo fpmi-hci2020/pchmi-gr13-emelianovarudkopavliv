@@ -2,7 +2,10 @@ from bookapi.store.endpoints.books import ns as book_ns
 from bookapi.restplus import api
 from database import db
 
+import os, signal
 from flask import Flask, Blueprint
+
+signal.signal(signal.SIGINT, lambda s, f: os._exit(0))
 
 app = Flask(__name__)
 
@@ -19,5 +22,5 @@ def init_app(flask_app):
 
 if __name__ == '__main__':
     init_app(app)
-    app.run()
+    app.run(host='0.0.0.0', port=os.getenv('PORT'))
 
