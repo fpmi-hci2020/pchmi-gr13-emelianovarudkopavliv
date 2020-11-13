@@ -10,7 +10,7 @@ signal.signal(signal.SIGINT, lambda s, f: os._exit(0))
 app = Flask(__name__)
 
 def configure_app(flask_app):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://torftgqndjevbk:7f45aed3cd2dafd6d6cedc61408e4fdb6fa653a0ffcedd5983965d36e77c6420@ec2-184-73-249-9.compute-1.amazonaws.com:5432/deenv7gf477jaj'
 
 def init_app(flask_app):
     configure_app(flask_app)
