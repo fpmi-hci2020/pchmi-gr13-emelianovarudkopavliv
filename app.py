@@ -6,11 +6,6 @@ from flask import Flask, Blueprint
 
 app = Flask(__name__)
 
-# @app.route("/books/book", methods=['GET'])
-# def get_book():
-#     book = bookapi.get_book()
-#     return jsonify(book)
-
 def configure_app(flask_app):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
