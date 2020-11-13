@@ -12,7 +12,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python app.py
 ```
-That would run this API locally. You can access it via http://localhost:5000/. See wiki for the list of currently implemented requests.
+That would run this API locally. You can access it via http://localhost:5000/api. See wiki for the list of currently implemented requests.
 ### Docker
 Just use these two commands:
 ```
@@ -21,7 +21,7 @@ docker run -p 5000:5000 --rm -it cicd-buzz
 ```
 
 ## Usage
-If you run this API locally, find it at http://localhost:5000/. Otherwise, it's at https://enigmatic-fjord-21043.herokuapp.com/. See wiki for the list of currently implemented requests.
+If you run this API locally, find it at http://localhost:5000/api. Otherwise, it's at https://enigmatic-fjord-21043.herokuapp.com/api. See wiki for the list of currently implemented requests.
 
 ## Contributing
 Olga Emelyanova - API  
