@@ -1,17 +1,28 @@
-from bookapi import bookapi
+from bookapi.store.endpoints.books import ns as book_ns
+from bookapi.restplus import api
+from database import db
 
-import os, signal
-from flask import Flask, jsonify
+from flask import Flask, Blueprint
 
 app = Flask(__name__)
 
-signal.signal(signal.SIGINT, lambda s,f: os._exit(0))
+# @app.route("/books/book", methods=['GET'])
+# def get_book():
+#     book = bookapi.get_book()
+#     return jsonify(book)
 
-@app.route("/books/book", methods=['GET'])
-def get_book():
-    book = bookapi.get_book()
-    return jsonify(book)
+def configure_app(flask_app):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+
+def init_app(flask_app):
+    configure_app(flask_app)
+    blueprint = Blueprint('api', __name__, url_prefix='/api')
+    api.init_app(blueprint)
+    api.add_namespace(book_ns)
+    flask_app.register_blueprint(blueprint)
+    db.init_app(flask_app)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=os.getenv('PORT'))
+    init_app(app)
+    app.run()
 
