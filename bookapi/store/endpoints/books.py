@@ -34,10 +34,8 @@ class BookCover(Resource):
 	
 	@api.representation('image/png')
 	def get(self, id):
-		file = io.BytesIO()
-		img = Image.new('RGBA', (50, 50), (70, 0, 0, 255))
-		img.save(file, 'png')
-		file.seek(0)
+		with open('/Users/home/Code/hmi/api/bookapi/store/endpoints/temp.png', 'rb') as f:
+			file = io.BytesIO(f.read())
 		return send_file(file,
 	                     as_attachment=True,
 	                     attachment_filename='annotated.png',
