@@ -10,3 +10,8 @@ book = api.model('Book', {
     'price': fields.Float(required=True, description='Book price'),
 })
 
+account = api.model('Account', {
+    'email': fields.String(required=True, description='Email associated with account'),
+    'password': fields.String(required=True, description='Account password'),
+})
+

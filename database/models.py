@@ -19,3 +19,15 @@ class Book(db.Model):
     def __repr__(self):
         return '<Book %r>' % self.title
 
+
+class Account(db.Model):
+    email = db.Column(db.String(100), primary_key=True)
+    password = db.Column(db.String(100))
+
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+
+    def __repr__(self):
+        return '<Account %r>' % self.email
+

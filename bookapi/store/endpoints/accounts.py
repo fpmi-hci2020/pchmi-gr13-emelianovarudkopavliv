@@ -10,13 +10,16 @@ ns = api.namespace('accounts', description='Operations related to user accounts'
 @ns.route('/')
 class AccountCollection(Resource):
 
-	# POST
+    @api.marshal_list_with(account)
+    def get(self):
+        accounts = Account.query.all()
+        return accounts
 
 
-@ns.route('/<string:id>')
+@ns.route('/<string:email>')
 @api.response(404, 'Account not found')
 class AccountItem(Resource):
     
     @api.marshal_with(account)
-    def get(self, name):
-        return Account.query.filter(Account.name == name).one()
+    def get(self, email):
+        return Account.query.filter(Account.email == email).one()
