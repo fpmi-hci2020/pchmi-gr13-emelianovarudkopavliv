@@ -34,7 +34,7 @@ class BookCover(Resource):
 	
 	@api.representation('image/png')
 	def get(self, id):
-		with open('/Users/home/Code/hmi/api/bookapi/store/endpoints/temp.png', 'rb') as f:
+		with open('temp.png', 'rb') as f:
 			file = io.BytesIO(f.read())
 		return send_file(file,
 	                     as_attachment=True,
