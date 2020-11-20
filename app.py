@@ -16,7 +16,10 @@ def init_app(flask_app):
     configure_app(flask_app)
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
+
     api.add_namespace(book_ns)
+    # api.add_namespace(account_ns)
+
     flask_app.register_blueprint(blueprint)
     db.init_app(flask_app)
 
