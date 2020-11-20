@@ -16,7 +16,7 @@ class AccountCollection(Resource):
     def post(self):
         data = request.json
         create_account(data)
-        return "Account successfully added", 201
+        return {}, 201
 
 
 @ns.route('/<string:email>')
