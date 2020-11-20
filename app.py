@@ -1,5 +1,5 @@
 from bookapi.store.endpoints.books import ns as book_ns
-from bookapi.store.endpoints.books import ns as account_ns
+from bookapi.store.endpoints.accounts import ns as account_ns
 from bookapi.restplus import api
 from database import db
 
@@ -18,8 +18,8 @@ def init_app(flask_app):
     blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(blueprint)
 
-    api.add_namespace(book_ns)
     api.add_namespace(account_ns)
+    api.add_namespace(book_ns)
 
     flask_app.register_blueprint(blueprint)
     db.init_app(flask_app)

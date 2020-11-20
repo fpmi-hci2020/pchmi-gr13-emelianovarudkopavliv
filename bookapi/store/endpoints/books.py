@@ -1,11 +1,13 @@
 from flask import request, send_file
-from flask import request, send_file
 from flask_restplus import Resource
 import io
 
 from bookapi.store.serializers import book
 from bookapi.restplus import api
 from database.models import Book
+
+from bookapi.store.serializers import account
+from database.models import Account
 
 ns = api.namespace('store/books', description='Operations related to books')
 

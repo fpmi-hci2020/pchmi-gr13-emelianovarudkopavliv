@@ -7,15 +7,6 @@ from database.models import Account
 ns = api.namespace('accounts', description='Operations related to user accounts')
 
 
-@ns.route('/')
-class AccountCollection(Resource):
-
-    @api.marshal_list_with(account)
-    def get(self):
-        accounts = Account.query.all()
-        return accounts
-
-
 @ns.route('/<string:email>')
 @api.response(404, 'Account not found')
 class AccountItem(Resource):
