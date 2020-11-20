@@ -1,6 +1,5 @@
 from flask import request, send_file
 from flask_restplus import Resource
-from PIL import Image
 import io
 
 from bookapi.store.serializers import book
