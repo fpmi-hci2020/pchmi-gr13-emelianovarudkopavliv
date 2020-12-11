@@ -27,11 +27,3 @@ class AccountItem(Resource):
     def get(self, email):
         return Account.query.filter(Account.email == email).one()
 
-
-@ns.route('/carts/<string:email>')
-@api.response(404, 'Account not found')
-class AccountCart(Resource):
-    
-    @api.marshal_with(cart)
-    def get(self, email):
-        return Account.query.filter(Account.email == email).one()

@@ -20,3 +20,9 @@ cart = api.model('Cart', {
     'quantity': fields.Integer(required=True, description='How many books')
 })
 
+cart_entry = api.inherit('Cart entry', {
+    'account': fields.String(required=True, description='Email associated with account'),
+    'book': fields.Integer(readOnly=True, description='The unique id of a book'),
+    'quantity': fields.Integer(required=True, description='How many books')
+})
+
