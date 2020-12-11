@@ -3,7 +3,7 @@ from flask_restplus import Resource
 import io
 
 from bookapi.store.serializers import cart, cart_entry
-from bookapi.store.business import add_to_cart, delete_cart_entry
+from bookapi.store.business import add_to_cart, update_cart, delete_cart_entry
 from bookapi.restplus import api
 from database.models import Cart
 
@@ -25,7 +25,7 @@ class CartCollection(Resource):
     @api.expect(cart_entry)
     def put(self):
         data = request.json
-        add_to_cart(data)
+        update_cart(data)
         return {}, 204
 
 
