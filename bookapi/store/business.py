@@ -97,3 +97,16 @@ def delete_order(id):
     order = Order.query.filter(Order.id == id).first()
     db.session.delete(order)
     db.session.commit()
+
+def create_preorder(data):
+    account_id = data.get('account')
+    account = Account.query.filter(Account.email == account_id).one()
+    book_id = data.get('book')
+    book = Book.query.filter(Book.id == book_id).one()
+    quantity = data.get('quantity')
+    cart = Cart(account, 
+                book, 
+                quantity,
+                'preorder')
+    db.session.add(cart)
+    db.session.commit()

@@ -88,6 +88,7 @@ class Account(db.Model):
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer)
+    cart = db.Column(db.String(10))
 
     account_id = db.Column(db.String(100), db.ForeignKey('account.email'))
     account = db.relationship('Account', backref=db.backref('cart', lazy='dynamic'))
@@ -95,10 +96,11 @@ class Cart(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     book = db.relationship('Book', backref=db.backref('carts', lazy='dynamic'))
 
-    def __init__(self, account, book, quantity):
+    def __init__(self, account, book, quantity, cart='cart'):
         self.account = account
         self.book = book
         self.quantity = quantity
+        self.cart = cart
 
     def __repr__(self):
         return '<Cart %r>' % self.account_id

@@ -35,7 +35,7 @@ class CartContents(Resource):
     
     @api.marshal_with(cart)
     def get(self, email):
-        return Cart.query.filter(Cart.account_id == email).all()
+        return Cart.query.filter(Cart.account_id == email).filter(Cart.cart == 'cart').all()
 
 
 @ns.route('/<string:email>/<int:book_id>')
