@@ -20,6 +20,14 @@ class CartCollection(Resource):
         add_to_cart(data)
         return {}, 201
 
+    
+    @api.response(204, 'Cart successfully updated.')
+    @api.expect(cart_entry)
+    def put(self):
+        data = request.json
+        add_to_cart(data)
+        return {}, 204
+
 
 @ns.route('/<string:email>')
 @api.response(404, 'Account not found')
