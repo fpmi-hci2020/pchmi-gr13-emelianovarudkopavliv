@@ -1,6 +1,6 @@
 from flask import request
 from flask_restplus import Resource
-from bookapi.store.serializers import account
+from bookapi.store.serializers import account, cart
 from bookapi.store.business import create_account
 from bookapi.restplus import api
 from database.models import Account
@@ -24,5 +24,14 @@ class AccountCollection(Resource):
 class AccountItem(Resource):
     
     @api.marshal_with(account)
+    def get(self, email):
+        return Account.query.filter(Account.email == email).one()
+
+
+@ns.route('/carts/<string:email>')
+@api.response(404, 'Account not found')
+class AccountCart(Resource):
+    
+    @api.marshal_with(cart)
     def get(self, email):
         return Account.query.filter(Account.email == email).one()

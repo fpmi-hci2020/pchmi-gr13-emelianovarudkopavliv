@@ -1,13 +1,12 @@
 from flask import request, send_file
+from flask import request, send_file
 from flask_restplus import Resource
 import io
 
 from bookapi.store.serializers import book
+from bookapi.store.business import create_book
 from bookapi.restplus import api
 from database.models import Book
-
-from bookapi.store.serializers import account
-from database.models import Account
 
 ns = api.namespace('store/books', description='Operations related to books')
 
@@ -19,6 +18,13 @@ class BookCollection(Resource):
     def get(self):
         books = Book.query.all()
         return books
+
+    @api.response(201, 'Book successfully added to store.')
+    @api.expect(book)
+    def post(self):
+        data = request.json
+        create_book(data)
+        return {}, 201
 
 
 @ns.route('/<int:id>')

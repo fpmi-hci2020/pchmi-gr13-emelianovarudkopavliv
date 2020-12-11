@@ -15,3 +15,8 @@ account = api.model('Account', {
     'password': fields.String(required=True, description='Account password'),
 })
 
+cart = api.model('Cart', {
+    'book': fields.Nested(book),
+    'quantity': fields.Integer(required=True, description='How many books')
+})
+
