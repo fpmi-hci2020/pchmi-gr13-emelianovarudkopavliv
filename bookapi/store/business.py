@@ -1,5 +1,8 @@
 from database import db
-from database.models import Book, Account, Cart, Favorite
+from database.models import Book, Account, Cart, Favorite, Publisher, Subscription, News
+
+def query_news(email):
+    return db.session.query(News).join(Publisher).join(Subscription).filter(Subscription.account_id == email).all()
 
 def create_account(data):
     account = Account(data.get('email'),
@@ -8,11 +11,15 @@ def create_account(data):
     db.session.commit()
 
 def create_book(data):
+    publisher_name = data.get('publisher')
+    publisher = Publisher.query.filter(Publisher.name == publisher_name).one()
     book = Book(data.get('title'), 
     	        data.get('author'), 
     	        data.get('genre'), 
     	        data.get('description'), 
-    	        data.get('price'))
+    	        data.get('price'),
+                data.get('availability'),
+                publisher)
     db.session.add(book)
     db.session.commit()
 

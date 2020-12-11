@@ -8,6 +8,8 @@ book = api.model('Book', {
     'genre': fields.String(description='Book genre'),
     'description': fields.String(description='Book description or synopsis'),
     'price': fields.Float(required=True, description='Book price'),
+    'publisher': fields.String(required=True, description='Publisher'),
+    'availability': fields.Boolean(required=True, description='If the book is available')
 })
 
 account = api.model('Account', {
@@ -26,12 +28,19 @@ cart_entry = api.inherit('Cart entry', {
     'quantity': fields.Integer(required=True, description='How many books')
 })
 
-favorite = api.model('Favorite', {
-    'book': fields.Nested(book),
+favorite = api.model('Favorite', { 
+	'book': fields.Nested(book) 
 })
 
 fav_entry = api.inherit('Favorite entry', {
     'account': fields.String(required=True, description='Email associated with account'),
     'book': fields.Integer(readOnly=True, description='The unique id of a book')
+})
+
+news = api.model('News', { 
+	'title': fields.String(required=True, description='News title'),
+	'content': fields.String(required=True, description='News content'), 
+	'date_issued': fields.Date(required=True, description='Date of issue'),
+	'publisher': fields.String(description='Publisher'),
 })
 
