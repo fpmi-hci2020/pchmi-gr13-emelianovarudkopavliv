@@ -26,3 +26,7 @@ cart_entry = api.inherit('Cart entry', {
     'quantity': fields.Integer(required=True, description='How many books')
 })
 
+favorite = api.model('Favorite', {
+    'book': fields.Nested(book),
+})
+

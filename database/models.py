@@ -50,3 +50,19 @@ class Cart(db.Model):
     def __repr__(self):
         return '<Cart %r>' % self.account_id
 
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    account_id = db.Column(db.String(100), db.ForeignKey('account.email'))
+    account = db.relationship('Account', backref=db.backref('favorites', lazy='dynamic'))
+
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    book = db.relationship('Book', backref=db.backref('favorites', lazy='dynamic'))
+
+    def __init__(self, account, book):
+        self.account = account
+        self.book = book
+
+    def __repr__(self):
+        return '<Favorite %r>' % self.account_id

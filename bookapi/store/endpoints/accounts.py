@@ -1,9 +1,9 @@
 from flask import request
 from flask_restplus import Resource
-from bookapi.store.serializers import account, cart
+from bookapi.store.serializers import account, favorite
 from bookapi.store.business import create_account
 from bookapi.restplus import api
-from database.models import Account
+from database.models import Account, Favorite
 
 ns = api.namespace('accounts', description='Operations related to user accounts')
 
@@ -26,4 +26,13 @@ class AccountItem(Resource):
     @api.marshal_with(account)
     def get(self, email):
         return Account.query.filter(Account.email == email).one()
+
+
+@ns.route('/favorites/<string:email>')
+@api.response(404, 'Account not found')
+class FavoriteCollection(Resource):
+    
+    @api.marshal_with(favorite)
+    def get(self, email):
+        return Favorite.query.filter(Favorite.account_id == email).all()
 
