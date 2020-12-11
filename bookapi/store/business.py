@@ -1,5 +1,5 @@
 from database import db
-from database.models import Book, Account, Cart
+from database.models import Book, Account, Cart, Favorite
 
 def create_account(data):
     account = Account(data.get('email'),
@@ -38,4 +38,20 @@ def update_cart(data):
 def delete_cart_entry(account_id, book_id):
     cart_entry = Cart.query.filter(Cart.account_id == account_id).filter(Cart.book_id == book_id).first()
     db.session.delete(cart_entry)
+    db.session.commit()
+
+
+def add_to_favorites(data):
+    account_id = data.get('account')
+    account = Account.query.filter(Account.email == account_id).one()
+    book_id = data.get('book')
+    book = Book.query.filter(Book.id == book_id).one()
+    favorite = Favorite(account, 
+                        book)
+    db.session.add(favorite)
+    db.session.commit()
+
+def remove_from_favorites(account_id, book_id):
+    fav = Favorite.query.filter(Favorite.account_id == account_id).filter(Favorite.book_id == book_id).first()
+    db.session.delete(fav)
     db.session.commit()

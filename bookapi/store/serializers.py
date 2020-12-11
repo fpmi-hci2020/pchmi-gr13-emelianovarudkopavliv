@@ -30,3 +30,8 @@ favorite = api.model('Favorite', {
     'book': fields.Nested(book),
 })
 
+fav_entry = api.inherit('Favorite entry', {
+    'account': fields.String(required=True, description='Email associated with account'),
+    'book': fields.Integer(readOnly=True, description='The unique id of a book')
+})
+
