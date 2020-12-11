@@ -78,17 +78,19 @@ def create_order(data):
     account = Account.query.filter(Account.email == account_id).one()
     payment_type = data.get('payment_method')
     shipping_type = data.get('shipping_method')
-    date_placed = data.get('date_placed')
-    order = Order(payment_type, shipping_type, date_placed, account)
+    order = Order(payment_type, shipping_type, account)
     db.session.add(order)
 
+    total_price = 0
     book_list = data.get('books')
     for book_entry in book_list:
         book_id = book_entry['book']
         book = Book.query.filter(Book.id == book_id).one()
         book_order = BookOrder(order, book, book_entry['quantity'])
         db.session.add(book_order)
+        total_price += book.price * book_entry['quantity']
 
+    order.price = total_price
     db.session.commit()
 
 def delete_order(id):

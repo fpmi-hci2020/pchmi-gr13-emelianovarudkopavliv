@@ -1,3 +1,4 @@
+from datetime import datetime
 from database import db
 
 
@@ -126,14 +127,15 @@ class Order(db.Model):
     shipping_method = db.Column(db.String(10))
     date_placed = db.Column(db.Date())
     date_delivered = db.Column(db.Date())
+    price = db.Column(db.Float)
 
     account_id = db.Column(db.String(100), db.ForeignKey('account.email'))
     account = db.relationship('Account', backref=db.backref('orders', lazy='dynamic'))
 
-    def __init__(self, payment_method, shipping_method, date_placed, account, date_delivered=None):
+    def __init__(self, payment_method, shipping_method, account, date_placed=None, date_delivered=None):
         self.payment_method = payment_method
         self.shipping_method = shipping_method
-        self.date_placed = date_placed
+        self.date_placed = datetime.utcnow()
         self.date_delivered = date_delivered
         self.account = account
 

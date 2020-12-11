@@ -2,7 +2,7 @@ from flask import request, send_file
 from flask_restplus import Resource
 import io
 
-from bookapi.store.serializers import order
+from bookapi.store.serializers import order, order_with_books
 from bookapi.store.business import create_order, delete_order
 from bookapi.restplus import api
 from database.models import Order
@@ -25,7 +25,7 @@ class OrderCollection(Resource):
 @api.response(404, 'Account not found')
 class OrderContents(Resource):
     
-    @api.marshal_with(order)
+    @api.marshal_with(order_with_books)
     def get(self, email):
         return Order.query.filter(Order.account_id == email).all()
 

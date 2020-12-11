@@ -61,6 +61,17 @@ order = api.model('Order', {
     'shipping_method': fields.String(required=True, description='Shipping type: deliver or collect'),
     'date_placed': fields.Date(required=True, description='Date on which the order was placed'),
     'date_delivered': fields.Date(required=True, description='Date on which the order was delivered'),
+    'price': fields.Float(required=True, description='Total price'),
     'books': fields.List(fields.Nested(order_entry))
 })
 
+order_with_books = api.model('Order with books', {
+	'id': fields.Integer(readOnly=True, description='Unique identifier'),
+    'account': fields.String(required=True, description='Account associated with order'),
+    'payment_method': fields.String(required=True, description='Payment type: cash or card'),
+    'shipping_method': fields.String(required=True, description='Shipping type: deliver or collect'),
+    'date_placed': fields.Date(required=True, description='Date on which the order was placed'),
+    'date_delivered': fields.Date(required=True, description='Date on which the order was delivered'),
+    'price': fields.Float(required=True, description='Total price'),
+    'books': fields.List(fields.Nested(cart))
+})
