@@ -81,7 +81,7 @@ class Account(db.Model):
         self.password = password
 
     def __repr__(self):
-        return '<Account %r>' % self.email
+        return self.email
 
 
 class Cart(db.Model):
@@ -118,3 +118,44 @@ class Favorite(db.Model):
 
     def __repr__(self):
         return '<Favorite %r>' % self.account_id
+
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    payment_method = db.Column(db.String(10))
+    shipping_method = db.Column(db.String(10))
+    date_placed = db.Column(db.Date())
+    date_delivered = db.Column(db.Date())
+
+    account_id = db.Column(db.String(100), db.ForeignKey('account.email'))
+    account = db.relationship('Account', backref=db.backref('orders', lazy='dynamic'))
+
+    def __init__(self, payment_method, shipping_method, date_placed, account, date_delivered=None):
+        self.payment_method = payment_method
+        self.shipping_method = shipping_method
+        self.date_placed = date_placed
+        self.date_delivered = date_delivered
+        self.account = account
+
+    def __repr__(self):
+        return '<Order %r>' % self.account_id
+
+
+class BookOrder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer)
+
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'))
+    order = db.relationship('Order', backref=db.backref('books', lazy='joined'))
+
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+    book = db.relationship('Book', backref=db.backref('orders', lazy='dynamic'))
+
+    def __init__(self, order, book, quantity):
+        self.order = order
+        self.book = book
+        self.quantity = quantity
+
+    def __repr__(self):
+        return '<Book-order %r>' % self.account_id
+

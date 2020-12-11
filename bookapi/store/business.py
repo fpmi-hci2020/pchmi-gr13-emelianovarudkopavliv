@@ -1,5 +1,5 @@
 from database import db
-from database.models import Book, Account, Cart, Favorite, Publisher, Subscription, News
+from database.models import Book, Account, Cart, Favorite, Publisher, Subscription, News, Order, BookOrder
 
 def query_news(email):
     return db.session.query(News).join(Publisher).join(Subscription).filter(Subscription.account_id == email).all()
@@ -61,4 +61,28 @@ def add_to_favorites(data):
 def remove_from_favorites(account_id, book_id):
     fav = Favorite.query.filter(Favorite.account_id == account_id).filter(Favorite.book_id == book_id).first()
     db.session.delete(fav)
+    db.session.commit()
+
+
+def create_order(data):
+    account_id = data.get('account')
+    account = Account.query.filter(Account.email == account_id).one()
+    payment_type = data.get('payment_method')
+    shipping_type = data.get('shipping_method')
+    date_placed = data.get('date_placed')
+    order = Order(payment_type, shipping_type, date_placed, account)
+    db.session.add(order)
+
+    book_list = data.get('books')
+    for book_entry in book_list:
+        book_id = book_entry['book']
+        book = Book.query.filter(Book.id == book_id).one()
+        book_order = BookOrder(order, book, book_entry['quantity'])
+        db.session.add(book_order)
+
+    db.session.commit()
+
+def delete_order(id):
+    order = Order.query.filter(Order.id == id).first()
+    db.session.delete(order)
     db.session.commit()

@@ -44,3 +44,18 @@ news = api.model('News', {
 	'publisher': fields.String(description='Publisher'),
 })
 
+order_entry = api.model('Order entry', {
+    'book': fields.Integer(readOnly=True, description='The unique id of a book'),
+    'quantity': fields.Integer(required=True, description='How many books')
+})
+
+order = api.model('Order', {
+	'id': fields.Integer(readOnly=True, description='Unique identifier'),
+    'account': fields.String(required=True, description='Account associated with order'),
+    'payment_method': fields.String(required=True, description='Payment type: cash or card'),
+    'shipping_method': fields.String(required=True, description='Shipping type: deliver or collect'),
+    'date_placed': fields.Date(required=True, description='Date on which the order was placed'),
+    'date_delivered': fields.Date(required=True, description='Date on which the order was delivered'),
+    'books': fields.List(fields.Nested(order_entry))
+})
+
