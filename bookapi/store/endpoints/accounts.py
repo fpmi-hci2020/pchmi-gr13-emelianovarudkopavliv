@@ -1,7 +1,7 @@
 from flask import request
 from flask_restplus import Resource
-from bookapi.store.serializers import account, favorite, fav_entry, news
-from bookapi.store.business import create_account, add_to_favorites, remove_from_favorites, query_news
+from bookapi.store.serializers import account, favorite, fav_entry, news, subscription
+from bookapi.store.business import create_account, add_to_favorites, remove_from_favorites, query_news, subscribe
 from bookapi.restplus import api
 from database.models import Account, Favorite, Publisher, News, Subscription
 
@@ -35,6 +35,17 @@ class NewsItem(Resource):
     @api.marshal_with(news)
     def get(self, email):
     	return query_news(email)
+
+
+@ns.route('/news/subscribe')
+class SubscriptionCollection(Resource):
+    
+    @api.response(201, 'Successfully subscribed.')
+    @api.expect(subscription)
+    def post(self):
+        data = request.json
+        subscribe(data)
+        return {}, 201
 
 
 @ns.route('/favorites')

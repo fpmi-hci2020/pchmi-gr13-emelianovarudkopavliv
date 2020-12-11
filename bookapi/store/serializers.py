@@ -17,6 +17,11 @@ account = api.model('Account', {
     'password': fields.String(required=True, description='Account password'),
 })
 
+subscription = api.model('Subscription', {
+	'account': fields.String(required=True, description='Email associated with account'),
+	'publisher': fields.String(required=True, description='Publisher name')
+})
+
 cart = api.model('Cart', {
     'book': fields.Nested(book),
     'quantity': fields.Integer(required=True, description='How many books')

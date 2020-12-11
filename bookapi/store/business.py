@@ -10,6 +10,15 @@ def create_account(data):
     db.session.add(account)
     db.session.commit()
 
+def subscribe(data):
+    account_id = data.get('account')
+    account = Account.query.filter(Account.email == account_id).one()
+    publisher_name = data.get('publisher')
+    publisher = Publisher.query.filter(Publisher.name == publisher_name).one()
+    subscription = Subscription(account, publisher)
+    db.session.add(subscription)
+    db.session.commit()
+
 def create_book(data):
     publisher_name = data.get('publisher')
     publisher = Publisher.query.filter(Publisher.name == publisher_name).one()

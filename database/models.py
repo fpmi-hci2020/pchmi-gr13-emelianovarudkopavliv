@@ -64,9 +64,9 @@ class Subscription(db.Model):
     publisher_name = db.Column(db.String(100), db.ForeignKey('publisher.name'))
     publisher = db.relationship('Publisher', backref=db.backref('subscriptions', lazy='dynamic'))
 
-    def __init__(self, account_id, publisher_name):
-        self.account_id = account_id
-        self.publisher_name = publisher_name
+    def __init__(self, account, publisher):
+        self.account = account
+        self.publisher = publisher
 
     def __repr__(self):
         return self.account_id
