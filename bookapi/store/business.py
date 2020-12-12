@@ -2,7 +2,7 @@ from database import db
 from database.models import Book, Account, Cart, Favorite, Publisher, Subscription, News, Order, BookOrder
 
 def query_news(email):
-    return db.session.query(News).join(Publisher).join(Subscription).filter(Subscription.account_id == email).all()
+    return db.session.query(News).join(Publisher).join(Subscription).filter(Subscription.account_id == email).order_by(News.date_issued.desc()).all()
 
 def create_account(data):
     account = Account(data.get('email'),
