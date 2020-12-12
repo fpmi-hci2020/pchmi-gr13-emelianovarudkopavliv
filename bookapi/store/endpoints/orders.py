@@ -14,7 +14,7 @@ ns = api.namespace('store/order', description='Operations related to orders')
 class OrderCollection(Resource):
     
     @api.response(201, 'Order successfully added.')
-    @api.expect(order)
+    @api.expect(order_with_books)
     def post(self):
         data = request.json
         create_order(data)

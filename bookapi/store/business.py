@@ -84,11 +84,12 @@ def create_order(data):
     total_price = 0
     book_list = data.get('books')
     for book_entry in book_list:
-        book_id = book_entry['book']
+        book_id = book_entry['book']['id']
         book = Book.query.filter(Book.id == book_id).one()
         book_order = BookOrder(order, book, book_entry['quantity'])
         db.session.add(book_order)
         total_price += book.price * book_entry['quantity']
+        delete_cart_entry(account_id, book_id)
 
     order.price = total_price
     db.session.commit()
