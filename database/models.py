@@ -138,7 +138,7 @@ class Order(db.Model):
         self.payment_method = payment_method
         self.shipping_method = shipping_method
         self.date_placed = datetime.utcnow()
-        self.date_delivered = date_delivered
+        self.date_delivered = self.date_placed + datetime.timedelta(days=10)
         self.account = account
 
     def __repr__(self):
