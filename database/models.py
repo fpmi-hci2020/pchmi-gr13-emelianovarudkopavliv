@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from database import db
 
 
@@ -137,8 +137,8 @@ class Order(db.Model):
     def __init__(self, payment_method, shipping_method, account, date_placed=None, date_delivered=None):
         self.payment_method = payment_method
         self.shipping_method = shipping_method
-        self.date_placed = datetime.utcnow()
-        self.date_delivered = self.date_placed + datetime.timedelta(days=10)
+        self.date_placed = datetime.now()
+        self.date_delivered = self.date_placed + timedelta(days=10)
         self.account = account
 
     def __repr__(self):
