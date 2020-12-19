@@ -1,5 +1,7 @@
 # Книжный онлайн-магазин
 
+[Презентация](https://docs.google.com/presentation/d/1CAkLSnS6ZJqOW6UFBXdKXF1jAFh4Hi8Rj4zAuh3BW9M/edit?usp=sharing)
+
 ## Description
 This is the repository containing the API of an online bookstore. The project as a whole consists of a website, a mobile app, and this API. The user should be able to "buy" a book, search for a book using various criteria, save the book for later, preorder, subscribe to publisher news, register.
 
